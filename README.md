@@ -39,7 +39,14 @@ In this project, I’ll aim to answer the following questions:
 14. Retrieve all available information for customers whose last names are either Williams, Taylor, or Andrews.
 15. The manager	asks	for the	rental	ID and	customer ID	of transactions that	have a rental	date starting May 26, 2005 and return date before May	29, 2005
 16. Get the film_id, title, and description from the film table which has rated G, PG-13, NC-17
-17. Provide the list of drama films that have. Get the title, description, and rental_rate of the film.
+17. Provide the list of drama films that have. Get the title, description, and rental rate of the film.
+18. List of customer information ( cus_id, email ) along with rental_id, and rental_date for customers who were served by staff no 1. Sort the result by rental_date ( most recent ones on top )
+19. Provide a list of the 5 shortest films with “G” rating and rental rates ranging from 2.99 to 4.99. Show their film ID and title
+SELECT film_id, title FROM film WHERE rating = 'G' AND rental_rate BETWEEN 2.99 AND 4.99 ORDER BY length LIMIT 5;
+20. Show the address details of customers whose phone numbers end with “10”, arranged by city ID where they live (in ascending order). Retrieve the address column only
+21. Get the data who don’t have inventory and sort it by film_id.
+22. The total and average amount paid by customer Elizabeth Brown
+23. Count the number of inventory per film of store 1. Short it by film_id
 
 Before getting started with analyses, I first tried understanding the ERM (Entity Relationship Model) of this database also known as Schema. Here is the Schema below:
 
@@ -90,7 +97,6 @@ SELECT customer_id, store_id, email
 FROM customer
 WHERE first_name = 'Nancy' AND last_name = 'Thomas'
 
-
 ### 9. Get the customer_id, first_name, last_name of for customer_id 1 to 10
 
 SELECT customer_id, first_name, last_name
@@ -133,10 +139,32 @@ SELECT film_id, title, description
 FROM film
 WHERE rating IN ('G', 'PG-13', 'NC-17')
 
-
-### 16. Provide the list of drama films that have. Get the title, description, and rental_rate of the film.
+### 16. Provide the list of drama films that have. Get the title, description, and rental rate of the film.
 
 SELECT title, description, rental_rate. 
 FROM film
 WHERE description LIKE '%Drama%'
+
+### 17. List of customer information ( cus_id, email ) along with rental_id, and rental_date for customers who were served by staff no 1. Sort the result by rental_date ( most recent ones on top )
+SELECT c.customer_id, email, rental_id, rental_date FROM customer c INNER JOIN rental r ON c.customer_id = r.customer_id WHERE staff_id = 1 ORDER BY rental_date DESC
+
+### 18. Provide a list of the 5 shortest films with “G” rating and rental rates ranging from 2.99 to 4.99. Show their film ID and title
+SELECT film_id, title FROM film WHERE rating = 'G' AND rental_rate BETWEEN 2.99 AND 4.99 ORDER BY length LIMIT 5;
+
+### 19. Show the address details of customers whose phone numbers end with “10”, arranged by city ID where they live (in ascending order). Retrieve the address column only
+SELECT address FROM address WHERE phone LIKE '%10' ORDER BY city_id
+
+### 20. Get the data who don’t have inventory and sort it by film_id
+SELECT f.film_id, title, inventory_id FROM film f LEFT JOIN inventory i ON f.film_id = i.film_id WHERE inventory_id IS NULL ORDER BY 1;
+
+### 21. The total and average amount paid by customer Elizabeth Brown
+SELECT SUM(amount) FROM payment p JOIN customer c ON p.customer_id = c.customer_id WHERE first_name = 'Elizabeth' AND last_name = 'Brown'
+SELECT AVG(amount) FROM payment p JOIN customer c ON p.customer_id = c.customer_id WHERE first_name = 'Elizabeth' AND last_name = 'Brown'
+
+### 22. Count the number of inventory per film of store 1. Short it by film_id
+SELECT f.film_id, title, COUNT(inventory_id) FROM film f JOIN inventory i ON f.film_id = i.film_id WHERE store_id = 1 GROUP BY 1 ORDER BY 1 TOP 10 power customers.
+
+SELECT c.customer_id, first_name, last_name, SUM(Amount) FROM customer c JOIN payment p ON c.customer_id = p.customer_id GROUP BY 1 ORDER BY 4 DESC LIMIT 10
+
+
 
