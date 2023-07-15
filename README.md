@@ -42,6 +42,7 @@ In this project, I’ll aim to answer the following questions:
 17. Provide the list of drama films that have. Get the title, description, and rental_rate of the film.
 
 Before getting started with analyses, I first tried understanding the ERM (Entity Relationship Model) of this database also known as Schema. Here is the Schema below:
+
 ![Uploading Re5gkP7yWnJhl7p84eVLeVRxixkh9Po284s0.png…]()
 
 
