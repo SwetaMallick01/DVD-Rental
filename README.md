@@ -1,6 +1,6 @@
 # Analyzed DVD rental data with SQL #
 ## Introduction ##
-I recently completed some training in Data Foundation facilitated by Bertelsmann’s School of Data Science (in partnership with Udacity). For a personal project, I decided to analyze the database for a DVD rental company we will call Rent A Film. Let’s take a look at a case study detailing my process and output.
+I recently completed some training in Data Foundation facilitated by Bertelsmann’s School of Data Science (in partnership with Udacity). For a personal project, I decided to analyze the database for a DVD rental company we will call Rent A Film. Let’s take a look at a case study detailing my process and output. 
 
 ![pexels-poranimm-athithawatthee-851177](https://github.com/SwetaMallick01/DVD-Rental/assets/132562651/7f64b40a-1b99-471f-99c5-62ebdd914902)
 
