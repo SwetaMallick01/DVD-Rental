@@ -43,7 +43,7 @@ In this project, I’ll aim to answer the following questions:
 
 Before getting started with analyses, I first tried understanding the ERM (Entity Relationship Model) of this database also known as Schema. Here is the Schema below:
 
-![Uploading Re5gkP7yWnJhl7p84eVLeVRxixkh9Po284s0.png…]()
+![Re5gkP7yWnJhl7p84eVLeVRxixkh9Po284s0](https://github.com/SwetaMallick01/DVD-Rental/assets/132562651/8a751bf5-d982-439d-a99e-6db406409a65)
 
 
 ## Analysis ##
