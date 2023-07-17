@@ -167,7 +167,66 @@ SELECT AVG(amount) FROM payment p JOIN customer c ON p.customer_id = c.customer_
 ### 22. Count the number of inventory per film of store 1. Short it by film_id
 SELECT f.film_id, title, COUNT(inventory_id) FROM film f JOIN inventory i ON f.film_id = i.film_id WHERE store_id = 1 GROUP BY 1 ORDER BY 1 TOP 10 power customers.
 
-SELECT c.customer_id, first_name, last_name, SUM(Amount) FROM customer c JOIN payment p ON c.customer_id = p.customer_id GROUP BY 1 ORDER BY 4 DESC LIMIT 10
+### 23. Categories the films based on their rental count. ( if less rental count is less than 10 then low, if it's between 10 to 20 then medium, if it's greater than 20 then High.
+
+SELECT film_id, title, COUNT(rental_id),
+       CASE WHEN COUNT(rental_id)< 10 THEN 'LOW'
+            WHEN COUNT(rental_id) BETWEEN 10 AND 20 THEN 'MEDIUM'
+			WHEN COUNT(rental_id)> 20 THEN 'High'
+			END AS film_rental_count
+FROM film f
+JOIN inventory i
+USING (film_id)
+JOIN rental r
+ON i.inventory_id = r.inventory_id
+GROUP BY 1,2
+
+### 24. Extract the last 10 digits of numbers from phone numbers. 
+
+SELECT address, RIGHT(phone, 10) AS Number
+FROM address
+
+
+### 25. Extract each customers country code from phone numbers
+
+SELECT *, LENGTH(phone),
+         CASE WHEN LENGTH(phone) = 11 THEN LEFT(phone, 1)
+		      WHEN LENGTH(phone) = 12 THEN LEFT(phone, 2)
+			  ELSE 'NULL'
+			  END AS Country_code
+FROM address 
+
+
+### 26. Get the first name from the email
+
+SELECT email, SUBSTRING(email, 1, POSITION ('.' IN email)-1) AS first_name
+--FROM customer
+
+### 27. Get the last name from the full name in lowercase
+
+SELECT title, SUBSTRING(LOWER(title), POSITION(' ' IN title)+1) AS lastname
+FROM film
+
+### 28. Combine the first_name, and last_name columns into one column make sure to give space between the first name and last name
+
+SELECT title, SUBSTRING(LOWER(title), POSITION(' ' IN title)+1) AS lastname
+FROM film
+
+### 29. Create a column by using the customers' district and country. Make sure to add a comma between them.
+
+SELECT district, country, CONCAT(district, ',', 'country') AS full_address
+FROM address a
+INNER JOIN city ct
+ON a.city_id = ct.city_id
+JOIN country c
+USING(country_id)
+
+### 30. Extract everything before @ from the email id and name the column email_name.
+
+SELECT email, LEFT(email, POSITION('@' IN email)-1) AS email_name
+FROM customer
+
+### 31. SELECT c.customer_id, first_name, last_name, SUM(Amount) FROM customer c JOIN payment p ON c.customer_id = p.customer_id GROUP BY 1 ORDER BY 4 DESC LIMIT 10
 
 
 
