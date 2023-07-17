@@ -226,7 +226,5 @@ USING(country_id)
 SELECT email, LEFT(email, POSITION('@' IN email)-1) AS email_name
 FROM customer
 
-### 31. SELECT c.customer_id, first_name, last_name, SUM(Amount) FROM customer c JOIN payment p ON c.customer_id = p.customer_id GROUP BY 1 ORDER BY 4 DESC LIMIT 10
-
 
 
